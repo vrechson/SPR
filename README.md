@@ -1,41 +1,28 @@
 # SPR - Swagger Proxy Runner
 
-SPR (Swagger Proxy Runner) automates API requests based on a Swagger file, using multithreading with a semaphore to limit concurrent requests, and routes them through a proxy for analysis.
+SPR (Swagger Proxy Runner) automates API requests based on OpenAPI/Swagger specifications, using concurrent requests through a proxy for security testing and analysis.
 
 ## Features
-- Reads API endpoints from a Swagger JSON file.
-- Supports `GET` requests with query parameters.
-- Uses `threads` and a `semaphore` (limit of 10 concurrent requests).
-- Sends requests through a proxy (`Burp Suite` by default).
+- Reads API endpoints from OpenAPI/Swagger JSON files
+- Supports multiple HTTP methods (GET, POST, PUT, DELETE, PATCH)
+- Concurrent request execution with configurable thread count
+- Proxy support for traffic analysis (e.g. Burp Suite)
+- Integer parameter fuzzing with multiple test values
+- Custom header support
+- Parameter value overrides
+- Progress bar for request tracking
+- Verbose output mode
 
 ## Requirements
-- Python 3.x
-- `requests` module
+- Go 1.24+
 
 ## Installation
-Clone this repository and install dependencies:
-```sh
-git clone https://github.com/arthur4ires/SPR
-cd SPR
-pip install -r requirements.txt
+```bash
+go install github.com/vrechson/spr@latest
 ```
 
-## Usage
-```sh
-python spr.py <swagger_file.json> <base_url>
+## Examples
+
 ```
-Example:
-```sh
-python spr.py swagger.json https://example.com
+spr -swagger examples/swagger.json -host 'https://api.ganjoor.net/' -param-override="id=1337" --int-fuzzing -threads 50
 ```
-
-## Configuration
-- The script processes only `GET` requests for now.
-- It replaces path parameters (`{}`) with a default value (`123`).
-- Uses a proxy (`127.0.0.1:8080`) for traffic analysis.
-
-## Contributing
-Feel free to submit pull requests for enhancements or additional HTTP methods.
-
-## License
-MIT License.
