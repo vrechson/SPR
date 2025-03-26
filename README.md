@@ -18,11 +18,11 @@ SPR (Swagger Proxy Runner) automates API requests based on OpenAPI/Swagger speci
 
 ## Installation
 ```bash
-go install github.com/vrechson/spr@latest
+go install github.com/vrechson/spr/cmd/spr@latest
 ```
 
-## Examples
+## Example
 
-```
-spr -swagger examples/swagger.json -host 'https://api.ganjoor.net/' -param-override="id=1337" --int-fuzzing -threads 50
+An example of how to run the SPR is by passing a swagger file and the API to perform the requests, you can use param override to define specific parameters such as id and int fuzzing to fuzz every integer param with different values. 
+```spr -swagger examples/swagger.json -host 'https://api.ganjoor.net/' -param-override="id=1337" --int-fuzzing -threads 50 -H 'Authorization: Bearer 1337'
 ```
